@@ -1,0 +1,849 @@
+/* Couples Connection Cards - Styles */
+
+/* Color Variables */
+:root {
+  --purple: #5D2E5A;
+  --purple-light: #7A4D77;
+  --purple-dark: #3D1E3A;
+  --gold: #C9A227;
+  --gold-light: #D4B74A;
+  --cream: #FDF8F3;
+  --cream-dark: #F5EDE3;
+  --green: #2E5D4A;
+  --green-light: #4A7A66;
+  --text-dark: #2D2D2D;
+  --text-light: #666666;
+  --shadow: rgba(93, 46, 90, 0.15);
+}
+
+/* Reset & Base */
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
+  background: var(--cream);
+  color: var(--text-dark);
+  min-height: 100vh;
+}
+
+.app {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+/* Typography */
+h1, h2, h3 {
+  font-family: Georgia, 'Times New Roman', serif;
+  font-weight: normal;
+}
+
+/* Header */
+.app-header {
+  text-align: center;
+  padding: 2rem 1rem;
+  background: linear-gradient(135deg, var(--purple) 0%, var(--purple-dark) 100%);
+  color: white;
+}
+
+.app-header h1 {
+  font-size: 2rem;
+  margin-bottom: 0.5rem;
+  color: var(--gold);
+}
+
+.app-header .subtitle {
+  opacity: 0.9;
+  font-size: 1rem;
+}
+
+/* Deck Selector */
+.deck-selector {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+}
+
+.deck-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 1rem;
+  padding: 1.5rem;
+  max-width: 600px;
+  margin: 0 auto;
+  width: 100%;
+}
+
+@media (min-width: 600px) {
+  .deck-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+.deck-card {
+  background: white;
+  border: none;
+  border-radius: 16px;
+  padding: 1.5rem;
+  cursor: pointer;
+  text-align: left;
+  transition: all 0.3s ease;
+  box-shadow: 0 4px 12px var(--shadow);
+  border-left: 4px solid var(--deck-color, var(--purple));
+}
+
+.deck-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 8px 24px var(--shadow);
+}
+
+.deck-card:active {
+  transform: translateY(-2px);
+}
+
+.deck-name {
+  font-size: 1.25rem;
+  color: var(--deck-color, var(--purple));
+  margin-bottom: 0.5rem;
+}
+
+.deck-tagline {
+  font-size: 0.95rem;
+  color: var(--text-dark);
+  font-weight: 500;
+  margin-bottom: 0.75rem;
+}
+
+.deck-description {
+  font-size: 0.85rem;
+  color: var(--text-light);
+  line-height: 1.5;
+}
+
+.favorites-card {
+  border-left-color: #E74C3C;
+}
+
+.favorites-card .deck-name {
+  color: #E74C3C;
+}
+
+/* Instructions Screen */
+.instructions {
+  min-height: 100vh;
+  background: linear-gradient(180deg, var(--cream) 0%, var(--cream-dark) 100%);
+  padding: 1rem;
+}
+
+.instructions-content {
+  max-width: 500px;
+  margin: 0 auto;
+  padding: 1rem;
+}
+
+.instructions-title {
+  font-size: 1.75rem;
+  color: var(--deck-color, var(--purple));
+  text-align: center;
+  margin-bottom: 2rem;
+}
+
+.instructions-section {
+  background: white;
+  border-radius: 12px;
+  padding: 1.5rem;
+  margin-bottom: 1rem;
+  box-shadow: 0 2px 8px var(--shadow);
+}
+
+.instructions-section h2 {
+  font-size: 1.1rem;
+  color: var(--deck-color, var(--purple));
+  margin-bottom: 1rem;
+  padding-bottom: 0.5rem;
+  border-bottom: 2px solid var(--gold);
+}
+
+.how-to-play {
+  font-size: 1rem;
+  line-height: 1.6;
+  color: var(--text-dark);
+}
+
+.instructions-list {
+  list-style: none;
+  padding: 0;
+}
+
+.instructions-list li {
+  position: relative;
+  padding-left: 1.5rem;
+  margin-bottom: 0.75rem;
+  font-size: 0.95rem;
+  line-height: 1.5;
+  color: var(--text-dark);
+}
+
+.instructions-list li::before {
+  content: '✦';
+  position: absolute;
+  left: 0;
+  color: var(--gold);
+}
+
+.start-button {
+  display: block;
+  width: 100%;
+  padding: 1rem;
+  background: var(--deck-color, var(--purple));
+  color: white;
+  border: none;
+  border-radius: 12px;
+  font-size: 1.1rem;
+  font-weight: 600;
+  cursor: pointer;
+  margin-top: 1.5rem;
+  transition: all 0.3s ease;
+}
+
+.start-button:hover {
+  filter: brightness(1.1);
+  transform: translateY(-2px);
+}
+
+/* Back Button */
+.back-button {
+  background: transparent;
+  border: none;
+  color: var(--purple);
+  font-size: 1rem;
+  cursor: pointer;
+  padding: 0.5rem 1rem;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  transition: opacity 0.2s;
+}
+
+.back-button:hover {
+  opacity: 0.7;
+}
+
+/* Card Deck View */
+.card-deck {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  background: linear-gradient(180deg, var(--cream) 0%, var(--cream-dark) 100%);
+}
+
+.deck-header {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  padding: 1rem;
+  background: white;
+  box-shadow: 0 2px 8px var(--shadow);
+}
+
+.deck-header h1 {
+  font-size: 1.25rem;
+  color: var(--deck-color, var(--purple));
+  flex: 1;
+  text-align: center;
+}
+
+.deck-progress {
+  font-size: 0.85rem;
+  color: var(--text-light);
+  white-space: nowrap;
+}
+
+/* Card Area */
+.card-area {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 2rem 1rem;
+}
+
+.card-placeholder {
+  text-align: center;
+  cursor: pointer;
+}
+
+.card-placeholder p {
+  margin-top: 1rem;
+  color: var(--text-light);
+  font-size: 0.95rem;
+}
+
+.card-back-preview {
+  width: 280px;
+  height: 380px;
+  background: linear-gradient(135deg, var(--purple) 0%, var(--purple-dark) 100%);
+  border-radius: 16px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 8px 32px var(--shadow);
+  transition: transform 0.3s ease;
+}
+
+.card-placeholder:hover .card-back-preview {
+  transform: scale(1.02);
+}
+
+/* Mandala Design */
+.mandala {
+  width: 120px;
+  height: 120px;
+  border: 3px solid var(--gold);
+  border-radius: 50%;
+  position: relative;
+}
+
+.mandala::before,
+.mandala::after {
+  content: '';
+  position: absolute;
+  border: 2px solid var(--gold);
+  border-radius: 50%;
+}
+
+.mandala::before {
+  width: 80px;
+  height: 80px;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+.mandala::after {
+  width: 40px;
+  height: 40px;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+/* Revealed Card */
+.revealed-card {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1rem;
+}
+
+.card-tap-area {
+  cursor: pointer;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  transition: transform 0.2s ease;
+}
+
+.card-tap-area:hover:not(.disabled) {
+  transform: scale(1.02);
+}
+
+.card-tap-area:active:not(.disabled) {
+  transform: scale(0.98);
+}
+
+.card-tap-area.disabled {
+  cursor: default;
+}
+
+.tap-hint {
+  margin-top: 0.75rem;
+  font-size: 0.85rem;
+  color: var(--text-light);
+  opacity: 0.8;
+}
+
+.card {
+  width: 300px;
+  max-width: 90vw;
+  aspect-ratio: 3/4;
+  perspective: 1000px;
+}
+
+.card-inner {
+  width: 100%;
+  height: 100%;
+  position: relative;
+  transform-style: preserve-3d;
+  transition: transform 0.6s;
+}
+
+.card.flipped .card-inner {
+  transform: rotateY(180deg);
+}
+
+.card-front,
+.card-back {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  backface-visibility: hidden;
+  border-radius: 16px;
+  box-shadow: 0 8px 32px var(--shadow);
+}
+
+.card-front {
+  background: white;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 2rem;
+  border: 3px solid var(--card-color, var(--purple));
+}
+
+.card-back {
+  background: linear-gradient(135deg, var(--card-color, var(--purple)) 0%, var(--purple-dark) 100%);
+  transform: rotateY(180deg);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.card-content {
+  text-align: center;
+}
+
+.card-category {
+  display: block;
+  font-size: 0.75rem;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  color: var(--gold);
+  margin-bottom: 1rem;
+}
+
+.card-text {
+  font-family: Georgia, serif;
+  font-size: 1.25rem;
+  line-height: 1.6;
+  color: var(--text-dark);
+}
+
+/* Card Ornaments */
+.card-ornament {
+  position: absolute;
+  width: 24px;
+  height: 24px;
+  border: 2px solid var(--gold);
+  opacity: 0.5;
+}
+
+.card-ornament.top-left {
+  top: 12px;
+  left: 12px;
+  border-right: none;
+  border-bottom: none;
+}
+
+.card-ornament.top-right {
+  top: 12px;
+  right: 12px;
+  border-left: none;
+  border-bottom: none;
+}
+
+.card-ornament.bottom-left {
+  bottom: 12px;
+  left: 12px;
+  border-right: none;
+  border-top: none;
+}
+
+.card-ornament.bottom-right {
+  bottom: 12px;
+  right: 12px;
+  border-left: none;
+  border-top: none;
+}
+
+/* Favorite Button */
+.favorite-button {
+  background: white;
+  border: 2px solid var(--cream-dark);
+  border-radius: 24px;
+  padding: 0.75rem 1.5rem;
+  font-size: 1rem;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.favorite-button:hover {
+  border-color: var(--gold);
+}
+
+.favorite-button.is-favorite {
+  background: #FFF5F5;
+  border-color: #E74C3C;
+}
+
+/* Deck Actions */
+.deck-actions {
+  padding: 1.5rem;
+  background: white;
+}
+
+.draw-button,
+.reset-button {
+  width: 100%;
+  padding: 1rem;
+  border: none;
+  border-radius: 12px;
+  font-size: 1.1rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.draw-button {
+  background: var(--deck-color, var(--purple));
+  color: white;
+}
+
+.draw-button:hover {
+  filter: brightness(1.1);
+}
+
+.reset-button {
+  background: var(--gold);
+  color: white;
+  margin-top: 1rem;
+}
+
+.all-used {
+  text-align: center;
+}
+
+.all-used p {
+  margin-bottom: 1rem;
+  color: var(--text-dark);
+  font-size: 1.1rem;
+}
+
+/* Empathy Deck */
+.empathy-deck {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  background: var(--cream);
+}
+
+.empathy-tabs {
+  display: flex;
+  gap: 0.5rem;
+  padding: 1rem;
+  background: white;
+  overflow-x: auto;
+  border-bottom: 1px solid var(--cream-dark);
+}
+
+.tab-button {
+  flex-shrink: 0;
+  padding: 0.75rem 1rem;
+  border: 2px solid var(--cream-dark);
+  border-radius: 24px;
+  background: white;
+  font-size: 0.9rem;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.tab-button.active {
+  background: var(--deck-color, var(--green));
+  color: white;
+  border-color: var(--deck-color, var(--green));
+}
+
+.tab-count {
+  background: var(--gold);
+  color: white;
+  font-size: 0.75rem;
+  padding: 0.1rem 0.5rem;
+  border-radius: 12px;
+}
+
+.tab-button.active .tab-count {
+  background: white;
+  color: var(--deck-color, var(--green));
+}
+
+.selection-info {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  font-size: 0.9rem;
+  color: var(--text-light);
+}
+
+.clear-button {
+  background: transparent;
+  border: 1px solid var(--text-light);
+  color: var(--text-light);
+  padding: 0.25rem 0.75rem;
+  border-radius: 12px;
+  font-size: 0.8rem;
+  cursor: pointer;
+}
+
+.clear-button:hover {
+  border-color: var(--purple);
+  color: var(--purple);
+}
+
+/* Empathy Cards Grid */
+.empathy-cards-grid {
+  flex: 1;
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(140px, 1fr));
+  gap: 0.75rem;
+  padding: 1rem;
+  align-content: start;
+}
+
+.empathy-card-wrapper {
+  position: relative;
+}
+
+.empathy-card {
+  width: 100%;
+  padding: 1rem;
+  background: white;
+  border: 2px solid var(--cream-dark);
+  border-radius: 12px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  text-align: center;
+  position: relative;
+}
+
+.empathy-card:hover {
+  border-color: var(--deck-color, var(--green));
+  transform: translateY(-2px);
+}
+
+.empathy-card.selected {
+  background: var(--deck-color, var(--green));
+  border-color: var(--deck-color, var(--green));
+  color: white;
+}
+
+.empathy-card-text {
+  font-size: 0.95rem;
+}
+
+.check-mark {
+  position: absolute;
+  top: 4px;
+  right: 8px;
+  font-size: 0.8rem;
+}
+
+.mini-favorite {
+  position: absolute;
+  bottom: -8px;
+  right: -8px;
+  width: 28px;
+  height: 28px;
+  border-radius: 50%;
+  border: none;
+  background: white;
+  box-shadow: 0 2px 6px var(--shadow);
+  cursor: pointer;
+  font-size: 0.75rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 1;
+}
+
+/* Selected Summary */
+.selected-summary {
+  background: white;
+  padding: 1rem;
+  border-top: 1px solid var(--cream-dark);
+  max-height: 40vh;
+  overflow-y: auto;
+}
+
+.selected-summary h3 {
+  font-size: 1rem;
+  color: var(--deck-color, var(--green));
+  margin-bottom: 1rem;
+}
+
+.selected-category {
+  margin-bottom: 1rem;
+}
+
+.selected-category h4 {
+  font-size: 0.85rem;
+  color: var(--text-light);
+  margin-bottom: 0.5rem;
+}
+
+.selected-tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+}
+
+.selected-tag {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  background: var(--cream);
+  padding: 0.4rem 0.75rem;
+  border-radius: 16px;
+  font-size: 0.85rem;
+}
+
+.remove-tag {
+  background: none;
+  border: none;
+  color: var(--text-light);
+  cursor: pointer;
+  font-size: 1rem;
+  line-height: 1;
+  padding: 0;
+}
+
+.remove-tag:hover {
+  color: var(--purple);
+}
+
+/* Favorites View */
+.favorites-view {
+  min-height: 100vh;
+  background: var(--cream);
+}
+
+.empty-favorites {
+  text-align: center;
+  padding: 4rem 2rem;
+  color: var(--text-light);
+}
+
+.empty-favorites p:first-child {
+  font-size: 1.25rem;
+  color: var(--text-dark);
+  margin-bottom: 0.5rem;
+}
+
+.empty-hint {
+  font-size: 0.95rem;
+}
+
+.favorites-content {
+  padding: 1rem;
+}
+
+.favorites-section {
+  margin-bottom: 2rem;
+}
+
+.favorites-deck-name {
+  font-size: 1.1rem;
+  color: var(--purple);
+  margin-bottom: 1rem;
+  padding-bottom: 0.5rem;
+  border-bottom: 2px solid var(--gold);
+}
+
+.favorites-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+  gap: 1rem;
+}
+
+.favorite-card-wrapper {
+  background: white;
+  border-radius: 12px;
+  overflow: hidden;
+  box-shadow: 0 2px 8px var(--shadow);
+}
+
+.favorite-card {
+  padding: 1.25rem;
+}
+
+.favorite-category {
+  display: block;
+  font-size: 0.7rem;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  color: var(--gold);
+  margin-bottom: 0.5rem;
+}
+
+.favorite-text {
+  font-family: Georgia, serif;
+  font-size: 1rem;
+  line-height: 1.5;
+  color: var(--text-dark);
+}
+
+.remove-favorite {
+  width: 100%;
+  padding: 0.75rem;
+  background: var(--cream);
+  border: none;
+  color: var(--text-light);
+  font-size: 0.85rem;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.remove-favorite:hover {
+  background: #FFE5E5;
+  color: #E74C3C;
+}
+
+/* Mobile Responsive */
+@media (max-width: 480px) {
+  .app-header h1 {
+    font-size: 1.5rem;
+  }
+
+  .deck-grid {
+    padding: 1rem;
+  }
+
+  .deck-card {
+    padding: 1.25rem;
+  }
+
+  .card {
+    width: 260px;
+  }
+
+  .card-text {
+    font-size: 1.1rem;
+  }
+
+  .empathy-cards-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .tab-button {
+    padding: 0.5rem 0.75rem;
+    font-size: 0.8rem;
+  }
+}
