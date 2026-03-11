@@ -155,8 +155,6 @@ function App() {
           selectedCards={empathySelections}
           onToggleCard={handleToggleEmpathyCard}
           onClearSelections={handleClearEmpathySelections}
-          favorites={favorites}
-          onToggleFavorite={handleToggleFavorite}
           onBack={handleBack}
         />
       )}
