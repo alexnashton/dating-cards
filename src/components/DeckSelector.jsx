@@ -1,7 +1,7 @@
 import { deckInfo } from '../data/deckInfo';
 
 const LEARN_MORE_LINKS = [
-  { label: 'Free Masterclass', url: 'https://eartheart.samcart.com/referral/webinarpartner/iFpAPsyWJmI54LDb' },
+  { label: 'Free: How to Become a Successful Relationship Coach & Improve your own Love Life', url: 'https://eartheart.samcart.com/referral/webinarpartner/iFpAPsyWJmI54LDb' },
   { label: 'Relationship Coach Certification Program', url: 'https://eartheart.samcart.com/referral/certificationpartner/iFpAPsyWJmI54LDb' },
   { label: 'Thrive in Love Online Course', url: 'https://eartheart.samcart.com/referral/2XJTNmiZ/iFpAPsyWJmI54LDb' },
   { label: 'Thriving Sex Online Course', url: 'https://eartheart.samcart.com/referral/R8nOlND4/iFpAPsyWJmI54LDb' },
