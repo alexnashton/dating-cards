@@ -3,7 +3,6 @@ import DeckSelector from './components/DeckSelector';
 import Instructions from './components/Instructions';
 import CardDeck from './components/CardDeck';
 import EmpathyDeck from './components/EmpathyDeck';
-import Favorites from './components/Favorites';
 import { dateNightCards } from './data/dateNightCards';
 import { friendsFirstCards } from './data/friendsFirstCards';
 import './App.css';
@@ -11,23 +10,17 @@ import './App.css';
 // localStorage keys
 const STORAGE_KEYS = {
   usedCards: 'couplesCards_usedCards',
-  favorites: 'couplesCards_favorites',
   empathySelections: 'couplesCards_empathySelections'
 };
 
 function App() {
-  const [view, setView] = useState('home'); // home, instructions, deck, empathy, favorites
+  const [view, setView] = useState('home'); // home, instructions, deck, empathy
   const [selectedDeck, setSelectedDeck] = useState(null);
 
   // Load state from localStorage
   const [usedCards, setUsedCards] = useState(() => {
     const saved = localStorage.getItem(STORAGE_KEYS.usedCards);
     return saved ? JSON.parse(saved) : { dateNight: [], friendsFirst: [] };
-  });
-
-  const [favorites, setFavorites] = useState(() => {
-    const saved = localStorage.getItem(STORAGE_KEYS.favorites);
-    return saved ? JSON.parse(saved) : [];
   });
 
   const [empathySelections, setEmpathySelections] = useState(() => {
@@ -39,10 +32,6 @@ function App() {
   useEffect(() => {
     localStorage.setItem(STORAGE_KEYS.usedCards, JSON.stringify(usedCards));
   }, [usedCards]);
-
-  useEffect(() => {
-    localStorage.setItem(STORAGE_KEYS.favorites, JSON.stringify(favorites));
-  }, [favorites]);
 
   useEffect(() => {
     localStorage.setItem(STORAGE_KEYS.empathySelections, JSON.stringify(empathySelections));
@@ -80,20 +69,6 @@ function App() {
     }));
   };
 
-  const handleToggleFavorite = (card) => {
-    setFavorites(prev => {
-      const exists = prev.some(
-        f => f.deckId === card.deckId && f.text === card.text
-      );
-      if (exists) {
-        return prev.filter(
-          f => !(f.deckId === card.deckId && f.text === card.text)
-        );
-      }
-      return [...prev, card];
-    });
-  };
-
   const handleToggleEmpathyCard = (tabId, card) => {
     setEmpathySelections(prev => {
       const current = prev[tabId] || [];
@@ -124,8 +99,6 @@ function App() {
       {view === 'home' && (
         <DeckSelector
           onSelectDeck={handleSelectDeck}
-          onViewFavorites={() => setView('favorites')}
-          favoritesCount={favorites.length}
         />
       )}
 
@@ -143,8 +116,6 @@ function App() {
           cards={getCardsForDeck(selectedDeck)}
           usedCards={usedCards[selectedDeck] || []}
           onMarkUsed={(index) => handleMarkUsed(selectedDeck, index)}
-          favorites={favorites}
-          onToggleFavorite={handleToggleFavorite}
           onReset={() => handleResetDeck(selectedDeck)}
           onBack={handleBack}
         />
@@ -159,13 +130,7 @@ function App() {
         />
       )}
 
-      {view === 'favorites' && (
-        <Favorites
-          favorites={favorites}
-          onRemoveFavorite={handleToggleFavorite}
-          onBack={handleBack}
-        />
-      )}
+
     </div>
   );
 }

@@ -1,6 +1,14 @@
 import { deckInfo } from '../data/deckInfo';
 
-function DeckSelector({ onSelectDeck, onViewFavorites, favoritesCount }) {
+const LEARN_MORE_LINKS = [
+  { label: 'Free Masterclass', url: 'https://eartheart.samcart.com/referral/webinarpartner/iFpAPsyWJmI54LDb' },
+  { label: 'Thrive in Love', url: 'https://eartheart.samcart.com/referral/2XJTNmiZ/iFpAPsyWJmI54LDb' },
+  { label: 'Thriving Sex Online Course', url: 'https://eartheart.samcart.com/referral/R8nOlND4/iFpAPsyWJmI54LDb' },
+  { label: 'Retreat', url: 'https://eartheart.samcart.com/referral/retreat/iFpAPsyWJmI54LDb' },
+  { label: 'Coach Certification', url: 'https://eartheart.samcart.com/referral/certificationpartner/iFpAPsyWJmI54LDb' },
+];
+
+function DeckSelector({ onSelectDeck }) {
   const decks = Object.values(deckInfo);
 
   return (
@@ -25,21 +33,24 @@ function DeckSelector({ onSelectDeck, onViewFavorites, favoritesCount }) {
             </div>
           </button>
         ))}
+      </div>
 
-        <button
-          className="deck-card favorites-card"
-          onClick={onViewFavorites}
-        >
-          <div className="deck-card-inner">
-            <h2 className="deck-name">❤️ Favorites</h2>
-            <p className="deck-tagline">Your saved cards</p>
-            <p className="deck-description">
-              {favoritesCount > 0
-                ? `You have ${favoritesCount} saved card${favoritesCount !== 1 ? 's' : ''}`
-                : 'Save cards from any deck to find them here'}
-            </p>
-          </div>
-        </button>
+      <div className="learn-more-section">
+        <h2 className="learn-more-title">Learn More</h2>
+        <p className="learn-more-subtitle">The Center for Thriving Relationships</p>
+        <div className="learn-more-links">
+          {LEARN_MORE_LINKS.map(link => (
+            <a
+              key={link.url}
+              href={link.url}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="learn-more-link"
+            >
+              {link.label}
+            </a>
+          ))}
+        </div>
       </div>
     </div>
   );

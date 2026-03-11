@@ -7,8 +7,6 @@ function CardDeck({
   cards,
   usedCards,
   onMarkUsed,
-  favorites,
-  onToggleFavorite,
   onReset,
   onBack
 }) {
@@ -30,20 +28,6 @@ function CardDeck({
     setCurrentCard({ text: cards[randomIndex], index: randomIndex });
     setIsRevealed(true);
     onMarkUsed(randomIndex);
-  };
-
-  const isFavorite = currentCard && favorites.some(
-    f => f.deckId === deckId && f.text === currentCard.text
-  );
-
-  const handleToggleFavorite = () => {
-    if (currentCard) {
-      onToggleFavorite({
-        deckId,
-        text: currentCard.text,
-        deckName: deck.name
-      });
-    }
   };
 
   return (
@@ -75,12 +59,6 @@ function CardDeck({
               />
               {!allUsed && <p className="tap-hint">Tap card for next question</p>}
             </div>
-            <button
-              className={`favorite-button ${isFavorite ? 'is-favorite' : ''}`}
-              onClick={handleToggleFavorite}
-            >
-              {isFavorite ? '❤️ Saved' : '🤍 Save'}
-            </button>
           </div>
         ) : null}
       </div>
