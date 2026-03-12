@@ -41,8 +41,25 @@ function CardDeck({
   const availableCards = cards.filter((_, index) => !usedCards.includes(index));
   const allUsed = availableCards.length === 0;
 
+  const drawQuestion = () => {
+    const availableIndices = cards
+      .map((_, index) => index)
+      .filter(index => !usedCards.includes(index));
+    const randomIndex = availableIndices[Math.floor(Math.random() * availableIndices.length)];
+    setCurrentCard({ text: cards[randomIndex], index: randomIndex });
+    setCurrentPromo(null);
+    onMarkUsed(randomIndex);
+    setIsRevealed(true);
+  };
+
   const handleTap = () => {
     if (allUsed) return;
+
+    // Dismissing a promo — draw next question without counting this tap
+    if (currentPromo) {
+      drawQuestion();
+      return;
+    }
 
     const nextTap = tapCount + 1;
     setTapCount(nextTap);
@@ -51,17 +68,10 @@ function CardDeck({
       const promoIndex = (Math.floor(nextTap / 5) - 1) % PROMO_CARDS.length;
       setCurrentPromo(PROMO_CARDS[promoIndex]);
       setCurrentCard(null);
+      setIsRevealed(true);
     } else {
-      const availableIndices = cards
-        .map((_, index) => index)
-        .filter(index => !usedCards.includes(index));
-      const randomIndex = availableIndices[Math.floor(Math.random() * availableIndices.length)];
-      setCurrentCard({ text: cards[randomIndex], index: randomIndex });
-      setCurrentPromo(null);
-      onMarkUsed(randomIndex);
+      drawQuestion();
     }
-
-    setIsRevealed(true);
   };
 
   return (
