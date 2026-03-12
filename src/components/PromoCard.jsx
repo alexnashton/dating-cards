@@ -1,7 +1,7 @@
 function PromoCard({ promo, flipped, color = '#5D2E5A' }) {
   return (
-    <div className={`promo-card-wrapper ${flipped ? 'flipped' : ''}`} style={{ '--card-color': color }}>
-      <div className="promo-card-inner">
+    <div className={`card ${flipped ? 'flipped' : ''}`} style={{ '--card-color': color }}>
+      <div className="card-inner">
         <div className="promo-card-front">
           <div className="card-ornament top-left" />
           <div className="card-ornament top-right" />
