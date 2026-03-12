@@ -509,6 +509,29 @@ h1, h2, h3 {
   border-top: none;
 }
 
+/* Card Promo Link */
+.card-promo-link {
+  display: block;
+  margin-top: 1rem;
+  padding: 0.85rem 1.25rem;
+  background: white;
+  border-radius: 12px;
+  box-shadow: 0 2px 8px var(--shadow);
+  color: var(--purple);
+  text-decoration: none;
+  font-size: 0.9rem;
+  font-weight: 500;
+  border-left: 4px solid var(--gold);
+  max-width: 300px;
+  text-align: left;
+  transition: all 0.2s ease;
+}
+
+.card-promo-link:hover {
+  transform: translateX(4px);
+  box-shadow: 0 4px 16px var(--shadow);
+}
+
 /* Deck Actions */
 .deck-actions {
   padding: 1.5rem;
