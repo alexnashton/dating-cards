@@ -1,4 +1,5 @@
 import { useState, useEffect } from 'react';
+import LandingScreen from './components/LandingScreen';
 import DeckSelector from './components/DeckSelector';
 import Instructions from './components/Instructions';
 import CardDeck from './components/CardDeck';
@@ -14,6 +15,7 @@ const STORAGE_KEYS = {
 };
 
 function App() {
+  const [showLanding, setShowLanding] = useState(true);
   const [view, setView] = useState('home'); // home, instructions, deck, empathy
   const [selectedDeck, setSelectedDeck] = useState(null);
 
@@ -93,6 +95,10 @@ function App() {
         return [];
     }
   };
+
+  if (showLanding) {
+    return <LandingScreen onContinue={() => setShowLanding(false)} />;
+  }
 
   return (
     <div className="app">

@@ -42,6 +42,185 @@ h1, h2, h3 {
   font-weight: normal;
 }
 
+/* Landing Screen */
+.landing-screen {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 2.5rem;
+  padding: 2rem 1rem;
+  background: linear-gradient(160deg, var(--purple-dark) 0%, var(--purple) 60%, var(--purple-light) 100%);
+}
+
+.landing-logo {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.75rem;
+}
+
+.landing-icon {
+  width: 80px;
+  height: 80px;
+  border-radius: 20px;
+  box-shadow: 0 4px 20px rgba(0,0,0,0.3);
+}
+
+.landing-title {
+  font-family: Georgia, serif;
+  font-size: 1.6rem;
+  color: white;
+  text-align: center;
+}
+
+.landing-subtitle {
+  font-size: 0.85rem;
+  color: var(--gold-light);
+  letter-spacing: 1px;
+  text-transform: uppercase;
+}
+
+.landing-cards {
+  display: flex;
+  gap: 1.5rem;
+  justify-content: center;
+}
+
+.landing-card-btn {
+  background: none;
+  border: none;
+  cursor: pointer;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.75rem;
+  padding: 0;
+  transition: transform 0.2s ease;
+}
+
+.landing-card-btn:hover {
+  transform: scale(1.05);
+}
+
+.landing-card-btn:active {
+  transform: scale(0.97);
+}
+
+.mini-card-back {
+  width: 120px;
+  height: 160px;
+  border-radius: 12px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 6px 20px rgba(0,0,0,0.35);
+}
+
+.mini-card-back .mandala {
+  width: 60px;
+  height: 60px;
+}
+
+.mini-card-back .mandala::before {
+  width: 40px;
+  height: 40px;
+}
+
+.mini-card-back .mandala::after {
+  width: 20px;
+  height: 20px;
+}
+
+.landing-card-label {
+  font-size: 0.8rem;
+  color: white;
+  text-align: center;
+  max-width: 120px;
+  line-height: 1.4;
+}
+
+.landing-continue-btn {
+  background: transparent;
+  border: 2px solid var(--gold);
+  color: var(--gold);
+  padding: 0.85rem 2rem;
+  border-radius: 30px;
+  font-size: 1rem;
+  cursor: pointer;
+  transition: background 0.2s ease, color 0.2s ease;
+}
+
+.landing-continue-btn:hover {
+  background: var(--gold);
+  color: white;
+}
+
+/* Install Modal */
+.install-modal-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(0,0,0,0.6);
+  display: flex;
+  align-items: flex-end;
+  justify-content: center;
+  z-index: 1000;
+  padding: 1rem;
+}
+
+.install-modal {
+  background: white;
+  border-radius: 20px 20px 16px 16px;
+  padding: 2rem;
+  width: 100%;
+  max-width: 420px;
+  box-shadow: 0 -4px 30px rgba(0,0,0,0.2);
+}
+
+.install-modal h2 {
+  font-family: Georgia, serif;
+  color: var(--purple);
+  margin-bottom: 0.75rem;
+  font-size: 1.2rem;
+}
+
+.install-modal p {
+  color: var(--text-light);
+  margin-bottom: 1rem;
+  font-size: 0.95rem;
+}
+
+.install-modal ol {
+  padding-left: 1.25rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.6rem;
+  margin-bottom: 1.5rem;
+}
+
+.install-modal li {
+  font-size: 0.95rem;
+  line-height: 1.5;
+  color: var(--text-dark);
+}
+
+.install-icon {
+  font-size: 1.1rem;
+  color: var(--purple);
+}
+
+.install-modal-close {
+  width: 100%;
+  padding: 0.85rem;
+  background: var(--purple);
+  color: white;
+  border: none;
+  border-radius: 12px;
+  font-size: 1rem;
+  cursor: pointer;
+}
+
 /* Header */
 .app-header {
   text-align: center;
