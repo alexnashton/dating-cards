@@ -38,7 +38,7 @@ function LandingScreen({ onContinue }) {
 
       <div className="landing-cards">
         <button className="landing-card-btn" onClick={handleIPhone}>
-          <div className="mini-card-back" style={{ background: 'linear-gradient(135deg, #5D2E5A 0%, #3D1E3A 100%)' }}>
+          <div className="mini-card-back" style={{ background: 'linear-gradient(135deg, #E8C5E5 0%, #B87DB4 40%, #7A4278 100%)' }}>
             <div className="mandala" />
           </div>
           <span className="landing-card-label">Download to iPhone</span>
