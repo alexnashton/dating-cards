@@ -406,9 +406,8 @@ h1, h2, h3 {
 }
 
 .card {
-  width: 300px;
-  max-width: 90vw;
-  aspect-ratio: 3/4;
+  width: min(300px, 90vw);
+  height: calc(min(300px, 90vw) * 4 / 3);
   perspective: 1000px;
   flex-shrink: 0;
   align-self: center;
@@ -513,9 +512,8 @@ h1, h2, h3 {
 
 /* Promo Card */
 .promo-card-wrapper {
-  width: 300px;
-  max-width: 90vw;
-  aspect-ratio: 3/4;
+  width: min(300px, 90vw);
+  height: calc(min(300px, 90vw) * 4 / 3);
   perspective: 1000px;
   flex-shrink: 0;
   align-self: center;

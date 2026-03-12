@@ -38,11 +38,11 @@ function CardDeck({
   const [cardFaceUp, setCardFaceUp] = useState(false);
   const cardPositionRef = useRef(0);
   const isAnimatingRef = useRef(false);
+  const initRef = useRef(false);
   const deck = deckInfo[deckId];
 
   const availableCards = cards.filter((_, index) => !usedCards.includes(index));
   const allUsed = availableCards.length === 0;
-  const initRef = useRef(false);
 
   const drawNextQuestion = () => {
     const availableIndices = cards
@@ -51,7 +51,7 @@ function CardDeck({
     const randomIndex = availableIndices[Math.floor(Math.random() * availableIndices.length)];
     setCurrentCard({ text: cards[randomIndex], index: randomIndex });
     setCurrentPromo(null);
-    setCardFaceUp(false); // new card starts face-down
+    setCardFaceUp(false);
     onMarkUsed(randomIndex);
     setIsRevealed(true);
   };
@@ -74,15 +74,14 @@ function CardDeck({
     if (allUsed && !currentPromo) return;
     if (isAnimatingRef.current) return;
     if (!cardFaceUp) {
-      setCardFaceUp(true); // tap to flip and reveal
+      setCardFaceUp(true);
     } else {
-      // Tap to unflip — animate back to face-down, then advance
       isAnimatingRef.current = true;
       setCardFaceUp(false);
       setTimeout(() => {
         isAnimatingRef.current = false;
         advance();
-      }, 600); // matches CSS transition duration
+      }, 600);
     }
   };
 
@@ -105,14 +104,7 @@ function CardDeck({
       </header>
 
       <div className="card-area">
-        {!isRevealed ? (
-          <div className="card-placeholder" onClick={drawNextQuestion}>
-            <div className="card-back-preview">
-              <div className="mandala" />
-            </div>
-            <p>Tap to draw a card</p>
-          </div>
-        ) : (
+        {isRevealed && (
           <div className="revealed-card">
             <div
               className={`card-tap-area ${allUsed && !currentPromo ? 'disabled' : ''}`}
@@ -129,7 +121,9 @@ function CardDeck({
               )}
               {!allUsed && (
                 <p className="tap-hint">
-                  {currentPromo ? 'Tap to continue' : cardFaceUp ? 'Tap card for next question' : 'Tap to reveal'}
+                  {cardFaceUp
+                    ? (currentPromo ? 'Tap to continue' : 'Tap for next question')
+                    : 'Tap to reveal'}
                 </p>
               )}
             </div>
