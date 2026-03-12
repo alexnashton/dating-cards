@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useRef } from 'react';
 import Card from './Card';
 import PromoCard from './PromoCard';
 import { deckInfo } from '../data/deckInfo';
@@ -35,43 +35,33 @@ function CardDeck({
   const [currentCard, setCurrentCard] = useState(null);
   const [currentPromo, setCurrentPromo] = useState(null);
   const [isRevealed, setIsRevealed] = useState(false);
-  const [tapCount, setTapCount] = useState(0);
+  const cardPositionRef = useRef(0);
   const deck = deckInfo[deckId];
 
   const availableCards = cards.filter((_, index) => !usedCards.includes(index));
   const allUsed = availableCards.length === 0;
 
-  const drawQuestion = () => {
-    const availableIndices = cards
-      .map((_, index) => index)
-      .filter(index => !usedCards.includes(index));
-    const randomIndex = availableIndices[Math.floor(Math.random() * availableIndices.length)];
-    setCurrentCard({ text: cards[randomIndex], index: randomIndex });
-    setCurrentPromo(null);
-    onMarkUsed(randomIndex);
-    setIsRevealed(true);
-  };
-
   const handleTap = () => {
     if (allUsed) return;
 
-    // Dismissing a promo — draw next question without counting this tap
-    if (currentPromo) {
-      drawQuestion();
-      return;
-    }
+    cardPositionRef.current += 1;
+    const pos = cardPositionRef.current;
 
-    const nextTap = tapCount + 1;
-    setTapCount(nextTap);
-
-    if (nextTap % 5 === 0) {
-      const promoIndex = (Math.floor(nextTap / 5) - 1) % PROMO_CARDS.length;
+    if (pos % 5 === 0) {
+      const promoIndex = (Math.floor(pos / 5) - 1) % PROMO_CARDS.length;
       setCurrentPromo(PROMO_CARDS[promoIndex]);
       setCurrentCard(null);
-      setIsRevealed(true);
     } else {
-      drawQuestion();
+      const availableIndices = cards
+        .map((_, index) => index)
+        .filter(index => !usedCards.includes(index));
+      const randomIndex = availableIndices[Math.floor(Math.random() * availableIndices.length)];
+      setCurrentCard({ text: cards[randomIndex], index: randomIndex });
+      setCurrentPromo(null);
+      onMarkUsed(randomIndex);
     }
+
+    setIsRevealed(true);
   };
 
   return (
