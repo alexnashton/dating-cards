@@ -1,13 +1,16 @@
 import { useState } from 'react';
 
-function Card({ text, category, isSelected, onSelect, showSelectButton = false, color = '#5D2E5A' }) {
-  const [isFlipped, setIsFlipped] = useState(false);
+function Card({ text, category, isSelected, onSelect, showSelectButton = false, color = '#5D2E5A', flipped }) {
+  const [internalFlipped, setInternalFlipped] = useState(false);
+  const isControlled = flipped !== undefined;
+  const isFlipped = isControlled ? flipped : internalFlipped;
 
   const handleClick = () => {
+    if (isControlled) return; // parent controls flip
     if (showSelectButton && onSelect) {
       onSelect();
     } else {
-      setIsFlipped(!isFlipped);
+      setInternalFlipped(!internalFlipped);
     }
   };
 

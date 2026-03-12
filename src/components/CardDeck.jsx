@@ -35,33 +35,50 @@ function CardDeck({
   const [currentCard, setCurrentCard] = useState(null);
   const [currentPromo, setCurrentPromo] = useState(null);
   const [isRevealed, setIsRevealed] = useState(false);
+  const [cardFaceUp, setCardFaceUp] = useState(false);
   const cardPositionRef = useRef(0);
   const deck = deckInfo[deckId];
 
   const availableCards = cards.filter((_, index) => !usedCards.includes(index));
   const allUsed = availableCards.length === 0;
 
-  const handleTap = () => {
-    if (allUsed) return;
+  const drawNextQuestion = () => {
+    const availableIndices = cards
+      .map((_, index) => index)
+      .filter(index => !usedCards.includes(index));
+    const randomIndex = availableIndices[Math.floor(Math.random() * availableIndices.length)];
+    setCurrentCard({ text: cards[randomIndex], index: randomIndex });
+    setCurrentPromo(null);
+    setCardFaceUp(false); // new card starts face-down
+    onMarkUsed(randomIndex);
+    setIsRevealed(true);
+  };
 
+  const advance = () => {
     cardPositionRef.current += 1;
     const pos = cardPositionRef.current;
-
     if (pos % 5 === 0) {
       const promoIndex = (Math.floor(pos / 5) - 1) % PROMO_CARDS.length;
       setCurrentPromo(PROMO_CARDS[promoIndex]);
       setCurrentCard(null);
+      setCardFaceUp(true);
+      setIsRevealed(true);
     } else {
-      const availableIndices = cards
-        .map((_, index) => index)
-        .filter(index => !usedCards.includes(index));
-      const randomIndex = availableIndices[Math.floor(Math.random() * availableIndices.length)];
-      setCurrentCard({ text: cards[randomIndex], index: randomIndex });
-      setCurrentPromo(null);
-      onMarkUsed(randomIndex);
+      drawNextQuestion();
     }
+  };
 
-    setIsRevealed(true);
+  const handleCardAreaTap = () => {
+    if (allUsed) return;
+    if (currentPromo) {
+      advance();
+      return;
+    }
+    if (!cardFaceUp) {
+      setCardFaceUp(true); // first tap: reveal the card
+    } else {
+      advance(); // second tap: draw next
+    }
   };
 
   return (
@@ -78,31 +95,35 @@ function CardDeck({
 
       <div className="card-area">
         {!isRevealed ? (
-          <div className="card-placeholder" onClick={handleTap}>
+          <div className="card-placeholder" onClick={drawNextQuestion}>
             <div className="card-back-preview">
               <div className="mandala" />
             </div>
             <p>Tap to draw a card</p>
           </div>
-        ) : currentPromo ? (
+        ) : (
           <div className="revealed-card">
-            <div className="card-tap-area" onClick={handleTap}>
-              <PromoCard promo={currentPromo} />
-              {!allUsed && <p className="tap-hint">Tap card to continue</p>}
+            <div
+              className={`card-tap-area ${allUsed && !currentPromo ? 'disabled' : ''}`}
+              onClick={allUsed && !currentPromo ? undefined : handleCardAreaTap}
+            >
+              {currentPromo ? (
+                <PromoCard promo={currentPromo} />
+              ) : (
+                <Card
+                  text={currentCard.text}
+                  color={deck.color}
+                  flipped={!cardFaceUp}
+                />
+              )}
+              {!allUsed && (
+                <p className="tap-hint">
+                  {currentPromo ? 'Tap to continue' : cardFaceUp ? 'Tap card for next question' : 'Tap to reveal'}
+                </p>
+              )}
             </div>
           </div>
-        ) : currentCard ? (
-          <div className="revealed-card">
-            <div className={`card-tap-area ${allUsed ? 'disabled' : ''}`} onClick={allUsed ? undefined : handleTap}>
-              <Card
-                key={currentCard.index}
-                text={currentCard.text}
-                color={deck.color}
-              />
-              {!allUsed && <p className="tap-hint">Tap card for next question</p>}
-            </div>
-          </div>
-        ) : null}
+        )}
       </div>
 
       {allUsed && (
