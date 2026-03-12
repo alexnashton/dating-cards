@@ -513,23 +513,20 @@ h1, h2, h3 {
 .card-promo-link {
   display: block;
   margin-top: 1rem;
-  padding: 0.85rem 1.25rem;
-  background: white;
-  border-radius: 12px;
-  box-shadow: 0 2px 8px var(--shadow);
-  color: var(--purple);
+  padding: 0.5rem 0.75rem;
+  border-top: 1px solid var(--gold);
+  color: var(--card-color, var(--purple));
   text-decoration: none;
-  font-size: 0.9rem;
-  font-weight: 500;
-  border-left: 4px solid var(--gold);
-  max-width: 300px;
-  text-align: left;
-  transition: all 0.2s ease;
+  font-size: 0.75rem;
+  font-weight: 600;
+  text-align: center;
+  line-height: 1.4;
+  opacity: 0.85;
+  transition: opacity 0.2s ease;
 }
 
 .card-promo-link:hover {
-  transform: translateX(4px);
-  box-shadow: 0 4px 16px var(--shadow);
+  opacity: 1;
 }
 
 /* Deck Actions */

@@ -67,19 +67,10 @@ function CardDeck({
               <Card
                 text={currentCard.text}
                 color={deck.color}
+                promoLink={showPromo ? promoLink : null}
               />
               {!allUsed && <p className="tap-hint">Tap card for next question</p>}
             </div>
-            {showPromo && (
-              <a
-                href={promoLink.url}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="card-promo-link"
-              >
-                {promoLink.label}
-              </a>
-            )}
           </div>
         ) : null}
       </div>

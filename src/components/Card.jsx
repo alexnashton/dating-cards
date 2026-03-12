@@ -1,6 +1,6 @@
 import { useState } from 'react';
 
-function Card({ text, category, isSelected, onSelect, showSelectButton = false, color = '#5D2E5A' }) {
+function Card({ text, category, isSelected, onSelect, showSelectButton = false, color = '#5D2E5A', promoLink = null }) {
   const [isFlipped, setIsFlipped] = useState(false);
 
   const handleClick = () => {
@@ -24,6 +24,17 @@ function Card({ text, category, isSelected, onSelect, showSelectButton = false, 
           <div className="card-content">
             {category && <span className="card-category">{category}</span>}
             <p className="card-text">{text}</p>
+            {promoLink && (
+              <a
+                href={promoLink.url}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="card-promo-link"
+                onClick={e => e.stopPropagation()}
+              >
+                {promoLink.label}
+              </a>
+            )}
           </div>
           <div className="card-ornament bottom-left" />
           <div className="card-ornament bottom-right" />
