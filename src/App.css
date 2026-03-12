@@ -1028,6 +1028,22 @@ h1, h2, h3 {
   font-style: italic;
 }
 
+.empathy-promo-cards {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+
+.empathy-promo-card {
+  position: relative !important;
+  width: auto !important;
+  height: auto !important;
+  border-radius: 16px;
+  padding: 2rem 1.5rem;
+  box-shadow: 0 8px 32px var(--shadow);
+  backface-visibility: visible !important;
+}
+
 /* Mobile Responsive */
 @media (max-width: 480px) {
   .app-header h1 {

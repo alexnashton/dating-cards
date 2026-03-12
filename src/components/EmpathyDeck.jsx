@@ -3,12 +3,23 @@ import Card from './Card';
 import { feelingsMet, feelingsUnmet, needs } from '../data/empathyCards';
 import { deckInfo } from '../data/deckInfo';
 
-const LEARN_MORE_LINKS = [
-  { label: 'Free: How to Become a Successful Relationship Coach & Improve your own Love Life', url: 'https://eartheart.samcart.com/referral/webinarpartner/iFpAPsyWJmI54LDb' },
-  { label: 'Relationship Coach Certification Program', url: 'https://eartheart.samcart.com/referral/certificationpartner/iFpAPsyWJmI54LDb' },
-  { label: 'Thrive in Love Online Course', url: 'https://eartheart.samcart.com/referral/2XJTNmiZ/iFpAPsyWJmI54LDb' },
-  { label: 'Thriving Sex Online Course', url: 'https://eartheart.samcart.com/referral/R8nOlND4/iFpAPsyWJmI54LDb' },
-  { label: 'Couples Retreat Weekend', url: 'https://eartheart.samcart.com/referral/retreat/iFpAPsyWJmI54LDb' },
+const PROMO_CARDS = [
+  {
+    tag: 'FREE TRAINING',
+    title: 'Want to become a relationship coach?',
+    body: 'There has never been a better time in history to help people with their relationships — while enjoying a meaningful and abundant career.',
+    feature: 'The <em>3 Keys</em> to Being a Successful <em>Relationship Coach</em> and Improving Your Own <em>Love Life</em>',
+    cta: 'Sign Up for Free Instant Access →',
+    url: 'https://eartheart.samcart.com/referral/webinarpartner/iFpAPsyWJmI54LDb',
+  },
+  {
+    tag: 'CERTIFICATION PROGRAM',
+    title: 'Become a certified relationship coach',
+    body: 'Join our comprehensive training program and build a thriving career helping couples create the love life they deserve.',
+    feature: '<em>Relationship Coach</em> Certification Program',
+    cta: 'Learn More →',
+    url: 'https://eartheart.samcart.com/referral/certificationpartner/iFpAPsyWJmI54LDb',
+  },
 ];
 
 function EmpathyDeck({
@@ -128,19 +139,28 @@ function EmpathyDeck({
             </section>
 
             <section className="empathy-summary-section">
-              <h2 className="empathy-summary-heading" style={{ fontStyle: 'normal' }}>Learn More</h2>
-              <p style={{ fontSize: '0.9rem', color: 'var(--text-light)', marginBottom: '1rem' }}>The Center for Thriving Relationships</p>
-              <div className="learn-more-links">
-                {LEARN_MORE_LINKS.map(link => (
-                  <a
-                    key={link.url}
-                    href={link.url}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="learn-more-link"
-                  >
-                    {link.label}
-                  </a>
+              <div className="empathy-promo-cards">
+                {PROMO_CARDS.map(promo => (
+                  <div key={promo.url} className="promo-card-front empathy-promo-card">
+                    <div className="card-ornament top-left" />
+                    <div className="card-ornament top-right" />
+                    <div className="promo-card-content">
+                      <p className="promo-card-tag">{promo.tag}</p>
+                      <h2 className="promo-card-title">{promo.title}</h2>
+                      <p className="promo-card-body">{promo.body}</p>
+                      <p className="promo-card-feature" dangerouslySetInnerHTML={{ __html: promo.feature }} />
+                      <a
+                        href={promo.url}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="promo-card-cta"
+                      >
+                        {promo.cta}
+                      </a>
+                    </div>
+                    <div className="card-ornament bottom-left" />
+                    <div className="card-ornament bottom-right" />
+                  </div>
                 ))}
               </div>
             </section>
