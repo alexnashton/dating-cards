@@ -1,6 +1,6 @@
-function PromoCard({ promo, flipped }) {
+function PromoCard({ promo, flipped, color = '#5D2E5A' }) {
   return (
-    <div className={`promo-card-wrapper ${flipped ? 'flipped' : ''}`}>
+    <div className={`promo-card-wrapper ${flipped ? 'flipped' : ''}`} style={{ '--card-color': color }}>
       <div className="promo-card-inner">
         <div className="promo-card-front">
           <div className="card-ornament top-left" />

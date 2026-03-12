@@ -112,7 +112,7 @@ function CardDeck({
               onClick={allUsed && !currentPromo ? undefined : handleCardAreaTap}
             >
               {currentPromo ? (
-                <PromoCard promo={currentPromo} flipped={!cardFaceUp} />
+                <PromoCard promo={currentPromo} flipped={!cardFaceUp} color={deck.color} />
               ) : (
                 <Card
                   text={currentCard.text}
