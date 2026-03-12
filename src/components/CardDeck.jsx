@@ -95,6 +95,7 @@ function CardDeck({
           <div className="revealed-card">
             <div className={`card-tap-area ${allUsed ? 'disabled' : ''}`} onClick={allUsed ? undefined : handleTap}>
               <Card
+                key={currentCard.index}
                 text={currentCard.text}
                 color={deck.color}
               />
