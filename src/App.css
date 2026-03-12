@@ -410,6 +410,8 @@ h1, h2, h3 {
   max-width: 90vw;
   aspect-ratio: 3/4;
   perspective: 1000px;
+  flex-shrink: 0;
+  align-self: center;
 }
 
 .card-inner {
@@ -515,6 +517,8 @@ h1, h2, h3 {
   max-width: 90vw;
   aspect-ratio: 3/4;
   perspective: 1000px;
+  flex-shrink: 0;
+  align-self: center;
 }
 
 .promo-card-inner {

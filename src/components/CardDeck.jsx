@@ -1,4 +1,4 @@
-import { useState, useRef } from 'react';
+import { useState, useRef, useEffect } from 'react';
 import Card from './Card';
 import PromoCard from './PromoCard';
 import { deckInfo } from '../data/deckInfo';
@@ -42,6 +42,7 @@ function CardDeck({
 
   const availableCards = cards.filter((_, index) => !usedCards.includes(index));
   const allUsed = availableCards.length === 0;
+  const initRef = useRef(false);
 
   const drawNextQuestion = () => {
     const availableIndices = cards
@@ -84,6 +85,12 @@ function CardDeck({
       }, 600); // matches CSS transition duration
     }
   };
+
+  useEffect(() => {
+    if (initRef.current) return;
+    initRef.current = true;
+    drawNextQuestion();
+  }, []);
 
   return (
     <div className="card-deck" style={{ '--deck-color': deck.color }}>
