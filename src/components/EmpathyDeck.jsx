@@ -3,6 +3,14 @@ import Card from './Card';
 import { feelingsMet, feelingsUnmet, needs } from '../data/empathyCards';
 import { deckInfo } from '../data/deckInfo';
 
+const LEARN_MORE_LINKS = [
+  { label: 'Free: How to Become a Successful Relationship Coach & Improve your own Love Life', url: 'https://eartheart.samcart.com/referral/webinarpartner/iFpAPsyWJmI54LDb' },
+  { label: 'Relationship Coach Certification Program', url: 'https://eartheart.samcart.com/referral/certificationpartner/iFpAPsyWJmI54LDb' },
+  { label: 'Thrive in Love Online Course', url: 'https://eartheart.samcart.com/referral/2XJTNmiZ/iFpAPsyWJmI54LDb' },
+  { label: 'Thriving Sex Online Course', url: 'https://eartheart.samcart.com/referral/R8nOlND4/iFpAPsyWJmI54LDb' },
+  { label: 'Couples Retreat Weekend', url: 'https://eartheart.samcart.com/referral/retreat/iFpAPsyWJmI54LDb' },
+];
+
 function EmpathyDeck({
   selectedCards,
   onToggleCard,
@@ -117,6 +125,24 @@ function EmpathyDeck({
               ) : (
                 <p className="empathy-summary-empty">No needs selected.</p>
               )}
+            </section>
+
+            <section className="empathy-summary-section">
+              <h2 className="empathy-summary-heading" style={{ fontStyle: 'normal' }}>Learn More</h2>
+              <p style={{ fontSize: '0.9rem', color: 'var(--text-light)', marginBottom: '1rem' }}>The Center for Thriving Relationships</p>
+              <div className="learn-more-links">
+                {LEARN_MORE_LINKS.map(link => (
+                  <a
+                    key={link.url}
+                    href={link.url}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="learn-more-link"
+                  >
+                    {link.label}
+                  </a>
+                ))}
+              </div>
             </section>
           </div>
         </div>
