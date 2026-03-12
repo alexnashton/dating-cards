@@ -69,15 +69,11 @@ function CardDeck({
   };
 
   const handleCardAreaTap = () => {
-    if (allUsed) return;
-    if (currentPromo) {
-      advance();
-      return;
-    }
+    if (allUsed && !currentPromo) return;
     if (!cardFaceUp) {
-      setCardFaceUp(true); // first tap: reveal the card
+      setCardFaceUp(true); // first tap: reveal (questions and promos)
     } else {
-      advance(); // second tap: draw next
+      advance(); // second tap: advance
     }
   };
 
