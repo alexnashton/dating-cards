@@ -61,7 +61,7 @@ function CardDeck({
       const promoIndex = (Math.floor(pos / 5) - 1) % PROMO_CARDS.length;
       setCurrentPromo(PROMO_CARDS[promoIndex]);
       setCurrentCard(null);
-      setCardFaceUp(true);
+      setCardFaceUp(false);
       setIsRevealed(true);
     } else {
       drawNextQuestion();
@@ -108,7 +108,7 @@ function CardDeck({
               onClick={allUsed && !currentPromo ? undefined : handleCardAreaTap}
             >
               {currentPromo ? (
-                <PromoCard promo={currentPromo} />
+                <PromoCard promo={currentPromo} flipped={!cardFaceUp} />
               ) : (
                 <Card
                   text={currentCard.text}

@@ -511,13 +511,8 @@ h1, h2, h3 {
 
 /* Promo Card */
 .promo-card {
-  width: 300px;
-  max-width: 90vw;
-  aspect-ratio: 3/4;
-  border-radius: 16px;
-  background: linear-gradient(160deg, var(--purple-light) 0%, var(--purple-dark) 100%);
-  box-shadow: 0 8px 32px var(--shadow);
-  position: relative;
+  background: linear-gradient(160deg, var(--purple-light) 0%, var(--purple-dark) 100%) !important;
+  border: none !important;
   display: flex;
   align-items: center;
   justify-content: center;
