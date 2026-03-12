@@ -37,6 +37,7 @@ function CardDeck({
   const [isRevealed, setIsRevealed] = useState(false);
   const [cardFaceUp, setCardFaceUp] = useState(false);
   const cardPositionRef = useRef(0);
+  const isAnimatingRef = useRef(false);
   const deck = deckInfo[deckId];
 
   const availableCards = cards.filter((_, index) => !usedCards.includes(index));
@@ -70,10 +71,17 @@ function CardDeck({
 
   const handleCardAreaTap = () => {
     if (allUsed && !currentPromo) return;
+    if (isAnimatingRef.current) return;
     if (!cardFaceUp) {
-      setCardFaceUp(true); // first tap: reveal (questions and promos)
+      setCardFaceUp(true); // tap to flip and reveal
     } else {
-      advance(); // second tap: advance
+      // Tap to unflip — animate back to face-down, then advance
+      isAnimatingRef.current = true;
+      setCardFaceUp(false);
+      setTimeout(() => {
+        isAnimatingRef.current = false;
+        advance();
+      }, 600); // matches CSS transition duration
     }
   };
 
