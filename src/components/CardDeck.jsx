@@ -1,10 +1,27 @@
-import { useState, useEffect } from 'react';
+import { useState } from 'react';
 import Card from './Card';
+import PromoCard from './PromoCard';
 import { deckInfo } from '../data/deckInfo';
 
-const PROMO_LINKS = [
-  { label: 'Free: How to Become a Successful Relationship Coach & Improve your own Love Life', url: 'https://eartheart.samcart.com/referral/webinarpartner/iFpAPsyWJmI54LDb' },
-  { label: 'Relationship Coach Certification Program', url: 'https://eartheart.samcart.com/referral/certificationpartner/iFpAPsyWJmI54LDb' },
+const PROMO_CARDS = [
+  {
+    id: 'masterclass',
+    tag: 'FREE TRAINING',
+    title: 'Want to become a relationship coach?',
+    body: 'There has never been a better time in history to help people with their relationships — while enjoying a meaningful and abundant career.',
+    feature: 'The <em>3 Keys</em> to Being a Successful <em>Relationship Coach</em> and Improving Your Own <em>Love Life</em>',
+    cta: 'Sign Up for Free Instant Access →',
+    url: 'https://eartheart.samcart.com/referral/webinarpartner/iFpAPsyWJmI54LDb',
+  },
+  {
+    id: 'certification',
+    tag: 'CERTIFICATION PROGRAM',
+    title: 'Become a certified relationship coach',
+    body: 'Join our comprehensive training program and build a thriving career helping couples create the love life they deserve.',
+    feature: '<em>Relationship Coach</em> Certification Program',
+    cta: 'Learn More →',
+    url: 'https://eartheart.samcart.com/referral/certificationpartner/iFpAPsyWJmI54LDb',
+  },
 ];
 
 function CardDeck({
@@ -16,30 +33,36 @@ function CardDeck({
   onBack
 }) {
   const [currentCard, setCurrentCard] = useState(null);
+  const [currentPromo, setCurrentPromo] = useState(null);
   const [isRevealed, setIsRevealed] = useState(false);
-  const [cardsDrawnCount, setCardsDrawnCount] = useState(0);
+  const [tapCount, setTapCount] = useState(0);
   const deck = deckInfo[deckId];
 
   const availableCards = cards.filter((_, index) => !usedCards.includes(index));
   const allUsed = availableCards.length === 0;
 
-  const drawCard = () => {
+  const handleTap = () => {
     if (allUsed) return;
 
-    const availableIndices = cards
-      .map((_, index) => index)
-      .filter(index => !usedCards.includes(index));
+    const nextTap = tapCount + 1;
+    setTapCount(nextTap);
 
-    const randomIndex = availableIndices[Math.floor(Math.random() * availableIndices.length)];
-    const nextCount = cardsDrawnCount + 1;
-    setCurrentCard({ text: cards[randomIndex], index: randomIndex });
+    if (nextTap % 5 === 0) {
+      const promoIndex = (Math.floor(nextTap / 5) - 1) % PROMO_CARDS.length;
+      setCurrentPromo(PROMO_CARDS[promoIndex]);
+      setCurrentCard(null);
+    } else {
+      const availableIndices = cards
+        .map((_, index) => index)
+        .filter(index => !usedCards.includes(index));
+      const randomIndex = availableIndices[Math.floor(Math.random() * availableIndices.length)];
+      setCurrentCard({ text: cards[randomIndex], index: randomIndex });
+      setCurrentPromo(null);
+      onMarkUsed(randomIndex);
+    }
+
     setIsRevealed(true);
-    setCardsDrawnCount(nextCount);
-    onMarkUsed(randomIndex);
   };
-
-  const showPromo = cardsDrawnCount > 0 && cardsDrawnCount % 5 === 0;
-  const promoLink = PROMO_LINKS[Math.floor(cardsDrawnCount / 5 - 1) % PROMO_LINKS.length];
 
   return (
     <div className="card-deck" style={{ '--deck-color': deck.color }}>
@@ -55,19 +78,25 @@ function CardDeck({
 
       <div className="card-area">
         {!isRevealed ? (
-          <div className="card-placeholder" onClick={drawCard}>
+          <div className="card-placeholder" onClick={handleTap}>
             <div className="card-back-preview">
               <div className="mandala" />
             </div>
             <p>Tap to draw a card</p>
           </div>
+        ) : currentPromo ? (
+          <div className="revealed-card">
+            <div className="card-tap-area" onClick={handleTap}>
+              <PromoCard promo={currentPromo} />
+              {!allUsed && <p className="tap-hint">Tap card to continue</p>}
+            </div>
+          </div>
         ) : currentCard ? (
           <div className="revealed-card">
-            <div className={`card-tap-area ${allUsed ? 'disabled' : ''}`} onClick={allUsed ? undefined : drawCard}>
+            <div className={`card-tap-area ${allUsed ? 'disabled' : ''}`} onClick={allUsed ? undefined : handleTap}>
               <Card
                 text={currentCard.text}
                 color={deck.color}
-                promoLink={showPromo ? promoLink : null}
               />
               {!allUsed && <p className="tap-hint">Tap card for next question</p>}
             </div>

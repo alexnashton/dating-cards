@@ -509,24 +509,81 @@ h1, h2, h3 {
   border-top: none;
 }
 
-/* Card Promo Link */
-.card-promo-link {
-  display: block;
-  margin-top: 1rem;
-  padding: 0.5rem 0.75rem;
-  border-top: 1px solid var(--gold);
-  color: var(--card-color, var(--purple));
-  text-decoration: none;
-  font-size: 0.75rem;
-  font-weight: 600;
-  text-align: center;
-  line-height: 1.4;
-  opacity: 0.85;
-  transition: opacity 0.2s ease;
+/* Promo Card */
+.promo-card {
+  width: 300px;
+  max-width: 90vw;
+  aspect-ratio: 3/4;
+  border-radius: 16px;
+  background: linear-gradient(160deg, var(--purple-light) 0%, var(--purple-dark) 100%);
+  box-shadow: 0 8px 32px var(--shadow);
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 2rem 1.5rem;
+  overflow: hidden;
 }
 
-.card-promo-link:hover {
-  opacity: 1;
+.promo-card-content {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  gap: 0.6rem;
+  z-index: 1;
+}
+
+.promo-card-tag {
+  font-size: 0.6rem;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  color: var(--gold);
+  font-weight: 700;
+}
+
+.promo-card-title {
+  font-family: Georgia, serif;
+  font-size: 1rem;
+  font-style: italic;
+  color: white;
+  line-height: 1.4;
+  margin: 0;
+}
+
+.promo-card-body {
+  font-size: 0.72rem;
+  color: rgba(255, 255, 255, 0.85);
+  line-height: 1.5;
+}
+
+.promo-card-feature {
+  font-family: Georgia, serif;
+  font-size: 0.85rem;
+  color: white;
+  line-height: 1.5;
+}
+
+.promo-card-feature em {
+  color: var(--gold);
+  font-style: italic;
+}
+
+.promo-card-cta {
+  display: inline-block;
+  margin-top: 0.4rem;
+  padding: 0.5rem 1.1rem;
+  background: var(--gold);
+  color: white;
+  text-decoration: none;
+  border-radius: 20px;
+  font-size: 0.78rem;
+  font-weight: 700;
+  transition: filter 0.2s ease;
+}
+
+.promo-card-cta:hover {
+  filter: brightness(1.15);
 }
 
 /* Deck Actions */
